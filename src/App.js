@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import Footer from './components/Footer'
+import Navbar from './components/Navbar'
+import FetchData from './components/FetchData'
+import Home from './pages/Home'
+import { useContext } from 'react'
+import {Appcontext} from "./components/Navbar"
+const App = () => {
+  const {search } = useContext(Appcontext)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Router>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/general" element={<FetchData cat="general" />} />
+      <Route path="/business" element={<FetchData cat="business" />} />
+      <Route path="/sports" element={<FetchData cat="sports" />} />
+      <Route path="/entertainment" element={<FetchData cat="entertainment" />} />
+      <Route path="/health" element={<FetchData cat="health" />} />
+      <Route path="/science" element={<FetchData cat="science" />} />
+      <Route path="/technology" element={<FetchData cat="technology" />} />
+      <Route path="/{search}" element={<FetchData search="{search}" />} />
+    </Routes>
+    
+    </Router>
+    
+    </>
+  )
 }
 
-export default App;
+export default App
